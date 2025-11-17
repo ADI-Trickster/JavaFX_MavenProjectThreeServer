@@ -1,0 +1,16 @@
+.border-pane {
+    -fx-background-color: #FFFFFF;
+}
+
+.button{
+    -fx-min-width: 100px;
+    -fx-min-height: 35px;
+    -fx-background-color: FFFFFF;
+}
+
+.textArea{
+    -fx-background-color: black;
+    -fx-text-fill: green;
+    -fx-control-inner-background: #FFFFFF;
+    -fx-font-weight: bold;
+}
