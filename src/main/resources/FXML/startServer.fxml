@@ -10,17 +10,13 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" styleClass="border-pane" fx:controller = "MyController"
             fx:id = "borderPane">
-<!--   <HBox>-->
-       <VBox>
-           <Button fx:id="StartServer" text = "Start Server"></Button>
-           <Button fx:id="StopServer" text = "Stop Server"></Button>
-
-           <HBox>
-               <TextArea fx:id="textA1"/>
-               <TextArea fx:id="textA2"/>
-           </HBox>
-       </VBox>
-<!--   </HBox>-->
-
+    <!--   <HBox>-->
+    <VBox alignment="CENTER">
+        <TextField fx:id="textF1" promptText="Ip address"/>
+        <TextField fx:id="textF2" promptText="Port Num(5555)"/>
+<!--        <Button fx:id="StartServer" text = "Start Server" onAction = "StartServerMethod"></Button>-->
+<!--        <Button fx:id="StopServer" text = "Stop Server" onAction="StopServer"></Button>-->
+    </VBox>
+    <!--   </HBox>-->
 </BorderPane>
 
