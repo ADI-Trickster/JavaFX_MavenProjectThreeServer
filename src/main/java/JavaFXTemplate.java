@@ -1,18 +1,9 @@
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 
 public class JavaFXTemplate extends Application {
@@ -27,8 +18,8 @@ public class JavaFXTemplate extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
         try {
-            Parent root = (Parent) FXMLLoader.load(getClass().getResource("serverFXML.fxml"));
-            primaryStage.setTitle("Adrian R. Anaya Homework 4");
+            Parent root = (Parent) FXMLLoader.load(getClass().getResource("FXML/startServer.fxml"));
+            primaryStage.setTitle("Adrian R. Anaya Server");
 
             Scene s1 = new Scene(root, (double)800.0F, (double)800.0F);
             s1.getStylesheets().add("styles.css");
