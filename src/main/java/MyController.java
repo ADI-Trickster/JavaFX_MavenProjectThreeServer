@@ -22,6 +22,9 @@ public class MyController implements Initializable{
     @FXML
     BorderPane borderPane;
 
+    @FXML
+    Button StopServer;
+
     Server serverConnection;
 
 
