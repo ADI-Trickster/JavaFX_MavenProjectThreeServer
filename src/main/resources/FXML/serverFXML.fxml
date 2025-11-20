@@ -12,8 +12,8 @@
             fx:id = "borderPane">
 <!--   <HBox>-->
            <VBox>
-               <TextArea fx:id="textA1"/>
-               <TextArea fx:id="textA2"/>
+<!--               <TextArea fx:id="textA1"/>-->
+<!--               <TextArea fx:id="textA2"/>-->
 <!--           </VBox>-->
 <!--           <VBox>-->
 <!--               <Button fx:id="StartServer" text = "Start Server" onAction = "#StartServerMethod"></Button>-->
