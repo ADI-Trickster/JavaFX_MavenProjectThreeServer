@@ -14,6 +14,7 @@ public class Server{
     ArrayList<ClientThread> clients = new ArrayList<ClientThread>();
     TheServer server;
     private Consumer<Serializable> callback;
+//    int port;
 
     Server(Consumer<Serializable> call){
         callback = call;
@@ -29,6 +30,7 @@ public class Server{
                 while(true) {
                     ClientThread c = new ClientThread(mysocket.accept(), count);
                     callback.accept("client has connected to server: " + "client #" + count);
+                    System.out.println("client has connected to server: " + "client #" + count);
                     clients.add(c);
                     c.start();
 
@@ -63,7 +65,6 @@ public class Server{
         }
 
         public void run(){
-
             try {
                 in = new ObjectInputStream(connection.getInputStream());
                 out = new ObjectOutputStream(connection.getOutputStream());
