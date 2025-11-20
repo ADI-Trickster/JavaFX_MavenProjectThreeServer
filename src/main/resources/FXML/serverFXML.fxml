@@ -18,8 +18,9 @@
        <VBox alignment="TOP_CENTER" spacing="20">
            <Button fx:id="StopServer" text="Stop Server" onAction="#StopServerMethod"/>
 <!--            <Region prefHeight="20"/>-->
-           <TextField fx:id="ServerListView" promptText="Server is waiting for a client!" editable="false"/>
+<!--           <TextField fx:id="ServerListView" promptText="Server is waiting for a client!" editable="false"/>-->
 <!--            <ListView fx:id="ServerListView" />-->
+           <ListView fx:id="ServerListView" prefWidth="400" prefHeight="300" style="-fx-border-color: #cccccc; -fx-border-width: 1;"/>
        </VBox>
     </center>
 </BorderPane>

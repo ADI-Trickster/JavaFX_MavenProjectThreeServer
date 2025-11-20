@@ -11,26 +11,24 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ListView;
 //import javafx.scene.image.Image;
 
 public class MyStartController implements Initializable{
-
     @FXML
     public BorderPane borderPane;
-
     @FXML
     public Button StopServer;
-
     @FXML
     public Button StartServer;
-
     @FXML
     public TextField textF1;//IP address
     @FXML
     public TextField textF2;//port num
 
     @FXML
-    public TextField ServerListView;//server text
+    public ListView ServerListView;//server text
+
     public Server serverConnection;
 
     @Override
@@ -86,7 +84,12 @@ public class MyStartController implements Initializable{
 //        });
     }
 
-    public void StopServerMethod(){
+    public void StopServerMethod(ActionEvent event) throws IOException{
+//        serverConnection.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/startServer.fxml"));
+        Parent root = loader.load();
+
+        borderPane.getScene().setRoot(root);
     }
 
 
