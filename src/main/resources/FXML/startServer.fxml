@@ -12,18 +12,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" styleClass="border-pane" fx:controller = "MyController"
+<BorderPane xmlns:fx="http://javafx.com/fxml" styleClass="border-pane" fx:controller = "MyStartController"
             fx:id = "borderPane">
     <!--   <HBox>-->
-    <VBox alignment="CENTER">
-<!--        <ImageView fitWidth="375" fitHeight="375">-->
-<!--            <Image url="/images/imageName.png"/>-->
-<!--        </ImageView>-->
-        <TextField fx:id="textF1" promptText="Ip address"/>
-        <TextField fx:id="textF2" promptText="Port Num(5555)"/>
-        <Button fx:id="StartServer" text = "Start Server" onAction = "StartServerMethod"></Button>
-<!--        <Button fx:id="StopServer" text = "Stop Server" onAction="StopServer"></Button>-->
-    </VBox>
+    <center>
+        <VBox alignment="CENTER">
+    <!--        <ImageView fitWidth="375" fitHeight="375">-->
+    <!--            <Image url="/images/imageName.png"/>-->
+    <!--        </ImageView>-->
+            <TextField fx:id="textF1" promptText="Ip address"/>
+            <TextField fx:id="textF2" promptText="Port Num(5555)"/>
+            <Button fx:id="StartServer" text="Start Server" onAction="#StartServerMethod"/>
+    <!--        <Button fx:id="StopServer" text = "Stop Server" onAction="StopServer"></Button>-->
+        </VBox>
+    </center>
     <!--   </HBox>-->
 </BorderPane>
 

@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.image.ImageView?>
+<!--&lt;!&ndash;<?import javafx.scene.layout.VBox?>&ndash;&gt;-->
+<!--<?import javafx.scene.control.Button?>-->
+<!--<?import javafx.scene.control.TextField?>-->
+<!--<?import javafx.scene.control.TextArea?>-->
+<!--&lt;!&ndash;<?import javafx.scene.layout.BorderPane?>&ndash;&gt;-->
+<!--<?import javafx.scene.layout.*?>-->
+<!--<?import javafx.scene.image.ImageView?>-->
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" styleClass="border-pane" fx:controller = "MyController"
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" styleClass="border-pane" fx:controller = "MyStartController"
             fx:id = "borderPane">
-<!--   <HBox>-->
-           <VBox>
-<!--               <TextArea fx:id="textA1"/>-->
-<!--               <TextArea fx:id="textA2"/>-->
-<!--           </VBox>-->
-<!--           <VBox>-->
-<!--               <Button fx:id="StartServer" text = "Start Server" onAction = "#StartServerMethod"></Button>-->
-                       <Button fx:id="StopServer" text = "Stop Server" onAction="#StopServerMethod"></Button>
-           </VBox>
-<!--   </HBox>-->
+    <center>
+       <VBox alignment="TOP_CENTER" spacing="20">
+           <Button fx:id="StopServer" text="Stop Server" onAction="#StopServerMethod"/>
+<!--            <Region prefHeight="20"/>-->
+           <TextField fx:id="ServerListView" promptText="Server is waiting for a client!" editable="false"/>
+<!--            <ListView fx:id="ServerListView" />-->
+       </VBox>
+    </center>
 </BorderPane>
 
