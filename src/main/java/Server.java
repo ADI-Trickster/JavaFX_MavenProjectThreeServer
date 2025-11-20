@@ -14,18 +14,20 @@ public class Server{
     ArrayList<ClientThread> clients = new ArrayList<ClientThread>();
     TheServer server;
     private Consumer<Serializable> callback;
-//    int port;
+    int port;
 
-    Server(Consumer<Serializable> call){
+    Server(Consumer<Serializable> call, int portNum){
         callback = call;
+        port = portNum;
         server = new TheServer();
         server.start();
     }
 
     public class TheServer extends Thread{
         public void run() {
-            try(ServerSocket mysocket = new ServerSocket(5555);){
+            try(ServerSocket mysocket = new ServerSocket(port);){
                 System.out.println("Server is waiting for a client!");
+                System.out.println("portNum: "+port);
 
                 while(true) {
                     ClientThread c = new ClientThread(mysocket.accept(), count);

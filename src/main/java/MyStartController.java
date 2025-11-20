@@ -60,7 +60,7 @@ public class MyStartController implements Initializable{
             Platform.runLater(()->{
                 textF2.getText();//portNum
             });
-        }
+        }, port
         );
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/serverFXML.fxml"));
