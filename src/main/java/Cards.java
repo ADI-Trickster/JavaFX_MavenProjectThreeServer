@@ -1,6 +1,6 @@
 public class Cards {
-    private char suit;
-    private int value;
+    private final char suit;
+    private final int value;
     private String cardImage;
 
     public Cards(char suit, int value) {
