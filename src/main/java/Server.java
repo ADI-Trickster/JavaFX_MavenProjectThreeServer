@@ -6,9 +6,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-import javafx.application.Platform;
-import javafx.scene.control.ListView;
-
 public class Server{
     int count = 1;
     ArrayList<ClientThread> clients = new ArrayList<ClientThread>();
@@ -30,7 +27,7 @@ public class Server{
                 System.out.println("portNum: "+port);
 
                 while(true) {
-                    ClientThread c = new ClientThread(mysocket.accept(), count);
+                    ClientThread c = new ClientThread(mysocket.accept(), count, callback);
                     callback.accept("client has connected to server: " + "client #" + count);
                     System.out.println("client has connected to server: " + "client #" + count);
                     clients.add(c);
@@ -50,10 +47,16 @@ public class Server{
         int count;
         ObjectInputStream in;
         ObjectOutputStream out;
+        private Consumer<Serializable> callback;
+        Deck clientDeck;
+        PokerInfo pokerInfo;
 
-        ClientThread(Socket s, int count){
+        ClientThread(Socket s, int count ,Consumer<Serializable> callback){
             this.connection = s;
             this.count = count;
+            this.callback = callback;
+            clientDeck = new Deck();
+            pokerInfo = new PokerInfo();
         }
 
         public void updateClients(String message) {
@@ -64,6 +67,17 @@ public class Server{
                 }
                 catch(Exception e) {}
             }
+        }
+
+        public void updateClients(PokerInfo pokerInfo) {
+//            for(int i = 0; i < clients.size(); i++) {
+//                ClientThread t = clients.get(i);
+//                try {
+//                    t.out.writeObject(pokerInfo);
+//                }
+//                catch(Exception e) {
+//                }
+//            }
         }
 
         public void run(){
@@ -88,9 +102,48 @@ public class Server{
                     callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
                     updateClients("Client #"+count+" has left the server!");
                     clients.remove(this);
+//                    count--;
                     break;
                 }
             }
         }//end of run
+
+        public void dealCards(){
+            //new game setup
+            //clear current cards if any
+
+            //set folded to false
+
+            //shuffle deck again if we want
+
+            //deal cards to player
+            //deal cards to dealer
+
+            //check pairPlus thing
+
+
+            //update the client
+        }
+
+        public void evalHandsOnServer(){
+            //check isFolded
+
+            //get the player and dealers hands
+            //check who won using the eval in gameLogic
+
+            int winnings = 0;
+            String messageToSend = "";
+
+
+            //if we want to add the deal quailfy check
+
+            //update client balance
+                //give them their winnings
+            //set new bet to zero
+            //set messageToSend
+            //send to client
+        }
+
+
     }//end of client thread
 }

@@ -84,9 +84,10 @@ public class ThreeCardLogic {
         return hand.get(0).getValue() == hand.get(1).getValue() && hand.get(2).getValue() == hand.get(1).getValue();
     }
 
-    public static boolean checkStraight(ArrayList<Cards> hand){
+    public static boolean checkStraight(ArrayList<Cards> hand){//TODO
         //for a straight all cards must have numerically adjacent to each other
         // count for the wrap around where Ace card can be 1 or 14(higher than King)
+        //maybe need to sort the array by value
         boolean checkAceLow = (hand.get(0).getValue() == hand.get(1).getValue()-1) &&
                 (hand.get(2).getValue()-1 == hand.get(1).getValue());
         boolean checkAceHigh = (hand.get(0).getValue() == 2) &&
