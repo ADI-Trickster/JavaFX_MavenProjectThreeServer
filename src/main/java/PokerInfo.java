@@ -1,4 +1,3 @@
-//import javax.smartcardio.Card;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -14,7 +13,7 @@ class PokerInfo implements Serializable {
     private int totalWinnings;
     private int gameOver;
 
-    private String message;
+    private String message; // say if player won or lost and how much
 
     public PokerInfo(){
         playerCards = new ArrayList<>();
@@ -57,8 +56,5 @@ class PokerInfo implements Serializable {
 
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
-
-
-
 
 }

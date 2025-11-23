@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class MyStartController implements Initializable{
     public TextField textF2;//port num
 
     @FXML
-    public ListView ServerListView;//server text
+    public ListView<String> ServerListView = new ListView<>();//server text
 
     public Server serverConnection;
 
@@ -38,6 +39,7 @@ public class MyStartController implements Initializable{
     public void StartServerMethod(ActionEvent event) throws IOException{
         String IP = textF1.getText();
         String portStr = textF2.getText();
+//        ServerListView = new ListView<>();
         if(IP.isEmpty() || portStr.isEmpty()){
             System.out.println("NO port or IP");
             return;
@@ -55,44 +57,29 @@ public class MyStartController implements Initializable{
             System.out.println("Invalid port or IP");
             return;
         }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/serverFXML.fxml"));
+        Parent root = loader.load();
+        MyStartController controller = loader.getController();
 
         serverConnection = new Server(data ->{
             Platform.runLater(()->{
-                textF2.getText();//portNum
+                controller.ServerListView.getItems().add(data.toString());
+//                textF2.getText();
             });
         }, port
         );
+        controller.serverConnection = serverConnection;
+        controller.ServerListView.getItems().add("Starting server on port " + port + "...");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/serverFXML.fxml"));
-        Parent root = loader.load();
-//        MyStartController controller = loader.getController();
-
-//        controller.setTitle("This is the Server");
-//        controller.textField1.clear();
-//        controller.textField2.setText("final string goes here");
-//        controller.textField2.clear();
-//        controller.but1.setDisable(false);
-//        controller.but1.setText("button one")
-
+//        controller.ServerListView.getItems().add(ServerListView.getItems().toString());
         borderPane.getScene().setRoot(root);
-//        primaryStage.setScene(sceneMap.get("server"));
-//        primaryStage.setTitle("This is the Server");
-//        serverConnection = new Server(data -> {
-//            Platform.runLater(()->{
-////                listItems.getItems().add(data.toString());
-//            });
-//        });
     }
 
     public void StopServerMethod(ActionEvent event) throws IOException{
 //        serverConnection.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/startServer.fxml"));
         Parent root = loader.load();
-
         borderPane.getScene().setRoot(root);
     }
-
-
-
 
 }
