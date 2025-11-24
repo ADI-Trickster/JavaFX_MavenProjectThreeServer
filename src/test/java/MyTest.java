@@ -1,17 +1,178 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.DisplayName;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import java.util.ArrayList;
 
-class MyTest {
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+public class MyTest {
+    //player hand
+    ArrayList<Cards> highCard = new ArrayList<>();
+    ArrayList<Cards> pair = new ArrayList<>();
+    ArrayList<Cards> flush = new ArrayList<>();
+    ArrayList<Cards> straight = new ArrayList<>();
+    ArrayList<Cards> threeKind = new ArrayList<>();
+    ArrayList<Cards> straightFlush = new ArrayList<>();
 
+    //dealer hand
+    ArrayList<Cards> dealerPair = new ArrayList<>();
+    ArrayList<Cards> playerPairBetter = new ArrayList<>();
+    ArrayList<Cards> playerHighCardWins = new ArrayList<>();
+    ArrayList<Cards> dealerHighCardWins = new ArrayList<>();
+    ArrayList<Cards> tieHand1 = new ArrayList<>();
+    ArrayList<Cards> tieHand2 = new ArrayList<>();
+
+
+    @BeforeEach
+    void setUp() {
+        highCard.clear();
+        pair.clear();
+        flush.clear();
+        straight.clear();
+        threeKind.clear();
+        straightFlush.clear();
+
+        // 1. Nothing Hand
+        highCard.add(new Cards('H', 7));
+        highCard.add(new Cards('S', 14));
+        highCard.add(new Cards('D', 2));
+
+        // 2. Pair
+        pair.add(new Cards('H', 2));
+        pair.add(new Cards('S', 14));
+        pair.add(new Cards('D', 2));
+
+        // 3. Flush
+        flush.add(new Cards('H', 7));
+        flush.add(new Cards('H', 14));
+        flush.add(new Cards('H', 2));
+
+        // 4. Straight
+        straight.add(new Cards('H', 7));
+        straight.add(new Cards('S', 8));
+        straight.add(new Cards('D', 9));
+
+        // 5. Three of a Kind
+        threeKind.add(new Cards('H', 7));
+        threeKind.add(new Cards('S', 7));
+        threeKind.add(new Cards('D', 7));
+
+        // 6. Straight Flush
+        straightFlush.add(new Cards('H', 7));
+        straightFlush.add(new Cards('H', 8));
+        straightFlush.add(new Cards('H', 9));
+
+        // tiebreakers
+        //dealer win
+        dealerPair.add(new Cards('C', 5));
+        dealerPair.add(new Cards('D', 5));
+        dealerPair.add(new Cards('H', 10));
+
+        //player win
+        playerPairBetter.add(new Cards('S', 5));
+        playerPairBetter.add(new Cards('H', 5));
+        playerPairBetter.add(new Cards('C', 13));
+
+        // High Card Tie
+        dealerHighCardWins.add(new Cards('H', 12));
+        dealerHighCardWins.add(new Cards('S', 6));
+        dealerHighCardWins.add(new Cards('D', 2));
+
+        // High Card Tie
+        playerHighCardWins.add(new Cards('C', 12));
+        playerHighCardWins.add(new Cards('D', 7));
+        playerHighCardWins.add(new Cards('H', 2));
+
+        // Perfect Tie
+        tieHand1.add(new Cards('H', 7));
+        tieHand1.add(new Cards('S', 5));
+        tieHand1.add(new Cards('D', 3));
+        tieHand2.add(new Cards('C', 7));
+        tieHand2.add(new Cards('D', 5));
+        tieHand2.add(new Cards('H', 3));
+    }
+
+
+    //TESTS
+    @Test
+    void testNothingHand() {
+        int result = ThreeCardLogic.evalHand(highCard);
+        assertEquals(ThreeCardLogic.nothingHand, result,
+                "High Card evaluate to NOTHING HAND");
+    }
+
+    @Test
+    void testPair() {
+        int result = ThreeCardLogic.evalHand(pair);
+        assertEquals(ThreeCardLogic.aPair, result,
+                "Pair evaluate to Pair");
+    }
+
+    @Test
+    void testFlush() {
+        int result = ThreeCardLogic.evalHand(flush);
+        assertEquals(ThreeCardLogic.Flush, result,
+                "Flush evaluate to Flush");
+    }
+
+    @Test
+    void testStraight() {
+        int result = ThreeCardLogic.evalHand(straight);
+        assertEquals(ThreeCardLogic.Straight, result,
+                "Straight evaluate to Straight");
+    }
+
+    @Test
+    void testThreeOfAKind() {
+        int result = ThreeCardLogic.evalHand(threeKind);
+        assertEquals(ThreeCardLogic.ThreeOfAKind, result,
+                "Three of a Kind evaluate to ThreeOfAKind");
+    }
+
+    @Test
+    void testStraightFlush() {
+        int result = ThreeCardLogic.evalHand(straightFlush);
+        assertEquals(ThreeCardLogic.StraightFlush, result,
+                "Straight Flush evaluate to StraightFlush");
+    }
+
+
+    @Test
+    void testPlayerWinsHigherRank() {
+        // Player vs Dealer  - Player wins
+        assertEquals(1, ThreeCardLogic.compareHands(flush, straight),
+                "Player (Straight) beat Dealer (Flush)");
+    }
+
+    @Test
+    void testDealerWinsHigherRank() {
+        // Dealer vs Player - Dealer wins
+        assertEquals(-1, ThreeCardLogic.compareHands(threeKind, pair),
+                "Dealer (Three of a Kind) beat Player (Pair)");
+    }
+
+    @Test
+    void testPairTiePlayerWins() {
+        assertEquals(1, ThreeCardLogic.compareHands(dealerPair, playerPairBetter),
+                "Player win Pair tie-breaker w King");
+    }
+
+    @Test
+    void testHighCardTieDealerWins() {
+        assertEquals(1, ThreeCardLogic.compareHands(dealerHighCardWins, playerHighCardWins),
+                "Player win High Card tie-breaker");
+
+        // test Dealer winning
+        assertEquals(-1, ThreeCardLogic.compareHands(playerHighCardWins, dealerHighCardWins),
+                "Dealer win High Card tie-breaker");
+    }
+
+    @Test
+    void testPerfectTie() {
+        // Hand 1 - (7, 5, 3) : Hand 2 - (7, 5, 3). Perfect match.
+        assertEquals(0, ThreeCardLogic.compareHands(tieHand1, tieHand2),
+                "Hands of the same rank and same cards should be a Tie");
+    }
 }
