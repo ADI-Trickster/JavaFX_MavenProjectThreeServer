@@ -24,7 +24,6 @@ public class JavaFXTemplate extends Application {
             Scene s1 = new Scene(root, (double)800.0F, (double)800.0F);
             s1.getStylesheets().add("Styles/styles.css");
             primaryStage.setScene(s1);
-
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

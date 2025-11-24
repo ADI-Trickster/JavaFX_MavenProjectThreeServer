@@ -18,7 +18,6 @@ public class Deck extends ArrayList<Cards> {
         }
         Collections.shuffle(this); // shuffles cards for the game
     }
-
     //add shuffle
 
     //add to get next 3 cards from array into hand
