@@ -10,14 +10,25 @@ class PokerInfo implements Serializable {
     private int bigBlind;
     private int pairPlusBet;
     private boolean playerFolded;
+    private boolean dealerQualifies;
     private int totalWinnings;
     private int gameOver;
+    public String gameState;
 
     private String message; // say if player won or lost and how much
 
     public PokerInfo(){
         playerCards = new ArrayList<>();
         dealerCards = new ArrayList<>();
+        gameState = "";
+    }
+
+    public boolean isHighQueenUp() {
+        return dealerQualifies;
+    }
+
+    public void highQueenUp(boolean dealerQualifies) {
+        this.dealerQualifies = dealerQualifies;
     }
 
     public ArrayList<Cards> getPlayerHand() { return playerCards; }
@@ -56,5 +67,4 @@ class PokerInfo implements Serializable {
 
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
-
 }

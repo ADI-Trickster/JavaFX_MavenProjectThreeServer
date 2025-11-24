@@ -32,6 +32,10 @@ public class ThreeCardLogic {
         return nothingHand;
     }
 
+    public static boolean validBet(int bet) {
+        return bet >= 5 && bet <= 25 || bet == 0;
+    }
+
     public static int evalPPWinnings(ArrayList<Cards> hand, int bet){
         int rankOfHand = evalHand(hand);
 
@@ -126,5 +130,11 @@ public class ThreeCardLogic {
         boolean secondTwo = (hand.get(2).getValue() == hand.get(1).getValue());
         boolean firstAndLast = (hand.get(0).getValue() == hand.get(2).getValue());
         return firstTwo || secondTwo || firstAndLast;
+    }
+
+    public static boolean dealerQualifies(ArrayList<Cards> dealerHand) {
+        dealerHand.sort((a, b) -> b.getValue() - a.getValue());
+        int highestCardValue = dealerHand.get(0).getValue();
+        return highestCardValue >= 12;
     }
 }
