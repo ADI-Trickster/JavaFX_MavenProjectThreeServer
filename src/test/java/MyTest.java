@@ -35,63 +35,63 @@ public class MyTest {
         straightFlush.clear();
 
         // 1. Nothing Hand
-        highCard.add(new Cards('H', 7));
-        highCard.add(new Cards('S', 14));
-        highCard.add(new Cards('D', 2));
+        highCard.add(new Cards("Hearts", 7));
+        highCard.add(new Cards("Spades", 14));
+        highCard.add(new Cards("Diamonds", 2));
 
         // 2. Pair
-        pair.add(new Cards('H', 2));
-        pair.add(new Cards('S', 14));
-        pair.add(new Cards('D', 2));
+        pair.add(new Cards("Hearts", 2));
+        pair.add(new Cards("Spades", 14));
+        pair.add(new Cards("Diamonds", 2));
 
         // 3. Flush
-        flush.add(new Cards('H', 7));
-        flush.add(new Cards('H', 14));
-        flush.add(new Cards('H', 2));
+        flush.add(new Cards("Hearts", 7));
+        flush.add(new Cards("Hearts", 14));
+        flush.add(new Cards("Hearts", 2));
 
         // 4. Straight
-        straight.add(new Cards('H', 7));
-        straight.add(new Cards('S', 8));
-        straight.add(new Cards('D', 9));
+        straight.add(new Cards("Hearts", 7));
+        straight.add(new Cards("Spades", 8));
+        straight.add(new Cards("Diamonds", 9));
 
         // 5. Three of a Kind
-        threeKind.add(new Cards('H', 7));
-        threeKind.add(new Cards('S', 7));
-        threeKind.add(new Cards('D', 7));
+        threeKind.add(new Cards("Hearts", 7));
+        threeKind.add(new Cards("Spades", 7));
+        threeKind.add(new Cards("Diamonds", 7));
 
         // 6. Straight Flush
-        straightFlush.add(new Cards('H', 7));
-        straightFlush.add(new Cards('H', 8));
-        straightFlush.add(new Cards('H', 9));
+        straightFlush.add(new Cards("Hearts", 7));
+        straightFlush.add(new Cards("Hearts", 8));
+        straightFlush.add(new Cards("Hearts", 9));
 
         // tiebreakers
         //dealer win
-        dealerPair.add(new Cards('C', 5));
-        dealerPair.add(new Cards('D', 5));
-        dealerPair.add(new Cards('H', 10));
+        dealerPair.add(new Cards("Clubs", 5));
+        dealerPair.add(new Cards("Diamonds", 5));
+        dealerPair.add(new Cards("Hearts", 10));
 
         //player win
-        playerPairBetter.add(new Cards('S', 5));
-        playerPairBetter.add(new Cards('H', 5));
-        playerPairBetter.add(new Cards('C', 13));
+        playerPairBetter.add(new Cards("Spades", 5));
+        playerPairBetter.add(new Cards("Hearts", 5));
+        playerPairBetter.add(new Cards("Clubs", 13));
 
         // High Card Tie
-        dealerHighCardWins.add(new Cards('H', 12));
-        dealerHighCardWins.add(new Cards('S', 6));
-        dealerHighCardWins.add(new Cards('D', 2));
+        dealerHighCardWins.add(new Cards("Hearts", 12));
+        dealerHighCardWins.add(new Cards("Spades", 6));
+        dealerHighCardWins.add(new Cards("Diamonds", 2));
 
         // High Card Tie
-        playerHighCardWins.add(new Cards('C', 12));
-        playerHighCardWins.add(new Cards('D', 7));
-        playerHighCardWins.add(new Cards('H', 2));
+        playerHighCardWins.add(new Cards("Clubs", 12));
+        playerHighCardWins.add(new Cards("Diamonds", 7));
+        playerHighCardWins.add(new Cards("Hearts", 2));
 
         // Perfect Tie
-        tieHand1.add(new Cards('H', 7));
-        tieHand1.add(new Cards('S', 5));
-        tieHand1.add(new Cards('D', 3));
-        tieHand2.add(new Cards('C', 7));
-        tieHand2.add(new Cards('D', 5));
-        tieHand2.add(new Cards('H', 3));
+        tieHand1.add(new Cards("Hearts", 7));
+        tieHand1.add(new Cards("Spades", 5));
+        tieHand1.add(new Cards("Diamonds", 3));
+        tieHand2.add(new Cards("Clubs", 7));
+        tieHand2.add(new Cards("Diamonds", 5));
+        tieHand2.add(new Cards("Hearts", 3));
     }
 
 
