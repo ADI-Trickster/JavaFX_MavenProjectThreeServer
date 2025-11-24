@@ -51,7 +51,7 @@ public class Server{
         Deck clientDeck;
         PokerInfo pokerInfo;
 
-        ClientThread(Socket s, int count ,Consumer<Serializable> callback){
+        ClientThread(Socket s, int count , Consumer<Serializable> callback){
             this.connection = s;
             this.count = count;
             this.callback = callback;
@@ -100,6 +100,7 @@ public class Server{
                         PokerInfo clientPokerInfo = (PokerInfo) data;
 
                         handlePokerMove(clientPokerInfo);
+                        updateClients(clientPokerInfo);
                     }
                 }
                 catch(Exception e) {

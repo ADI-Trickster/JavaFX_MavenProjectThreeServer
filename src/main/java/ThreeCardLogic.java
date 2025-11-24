@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ThreeCardLogic {
     //order of ranks to win
-    public static final int StraightFlush =6;
+    public static final int StraightFlush = 6;
     public static final int ThreeOfAKind = 5;
     public static final int Straight = 4;
     public static final int Flush = 3;
