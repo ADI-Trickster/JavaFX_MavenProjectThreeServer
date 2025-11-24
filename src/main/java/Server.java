@@ -116,18 +116,18 @@ public class Server{
                     try {
                         PokerInfo data = (PokerInfo) in.readObject();
                         PokerInfo dataToSend = new PokerInfo();
-                        if(data.getMessage().equals("draw")){
+                        if(data.getGameState().equals("draw")){
                             dataToSend.setPlayerHand(data.getPlayerHand());
                             dataToSend.setDealerHand(data.getDealerHand());
 //                            dataToSend.
                         }
-                        else if(data.getMessage().equals("play")){
+                        else if(data.getGameState().equals("play")){//TODO
                             dataToSend.setPlayerHand(data.getPlayerHand());
                             dataToSend.setDealerHand(data.getDealerHand());
                         }else if(data.getMessage().equals("fold")){
-
+                            //TODO
                         }else{
-                            updateClients(data.getMessage());
+//                            updateClients(data.getMessage());
                         }
                     }
                     catch(Exception e) {
