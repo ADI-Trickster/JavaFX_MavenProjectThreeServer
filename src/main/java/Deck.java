@@ -20,7 +20,19 @@ public class Deck extends ArrayList<Cards> {
     }
     //add shuffle
 
+    public void shuffleDeck() {
+        Collections.shuffle(this);
+    }
+
     //add to get next 3 cards from array into hand
+    public ArrayList<Cards> add3CardsFromDeck(){
+        ArrayList<Cards> cards = new ArrayList<>();
+        //add 3 cards
+        for(int i = 0; i < 3; i++){
+            cards.add(this.remove(0));
+        }
+        return cards;
+    }
 
 
 }
