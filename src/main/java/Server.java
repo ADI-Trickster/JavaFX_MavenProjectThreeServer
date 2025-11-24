@@ -111,48 +111,38 @@ public class Server{
                 out = new ObjectOutputStream(connection.getOutputStream());
                 connection.setTcpNoDelay(true);
 
-                callback.accept("Client # " + count);
-
-                while(true){
-                    try{
-
-
-
-
-
-
+                updateClients("new client on server: client #"+count);
+                while(true) {
+                    try {
+                        PokerInfo data = (PokerInfo) in.readObject();
+                        PokerInfo dataToSend = new PokerInfo();
+                        if(data.getGameState().equals("draw")){
+                            dataToSend.setPlayerHand(data.getPlayerHand());
+                            dataToSend.setDealerHand(data.getDealerHand());
+                            dataToSend.setGameState("drawFromserver");
+                        }
+                        else if(data.getGameState().equals("play")){//TODO
+                            dataToSend.setPlayerHand(data.getPlayerHand());
+                            dataToSend.setDealerHand(data.getDealerHand());
+                            dataToSend.setGameState("playFromserver");
+                        }else if(data.getMessage().equals("fold")){
+                            //TODO
+                        }else{
+                        }
+                            updateClients(dataToSend);
                     }
-                    catch(Exception e){
-                        callback.accept("Server socket did not launch");
+                    catch(Exception e) {
+                        callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
+                        updateClients("Client #"+count+" has left the server!");
+                        clients.remove(this);
+//                    count--;
+                        break;
                     }
                 }
-
-
             }
             catch(Exception e) {
                 System.out.println("Streams not open");
             }
-
-//            updateClients("new client on server: client #"+count);
-//
-//            while(true) {
-//                try {
-//                    Object data = in.readObject();
-//                    if(data instanceof PokerInfo){
-//                        PokerInfo clientPokerInfo = (PokerInfo) data;
-//
-//                        handlePokerMove(clientPokerInfo);
-//                        updateClients(clientPokerInfo);
-//                    }
-//                }
-//                catch(Exception e) {
-//                    callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
-//                    updateClients("Client #"+count+" has left the server!");
-//                    clients.remove(this);
-////                    count--;
-//                    break;
-//                }
-//            }
         }//end of run
 
         public void handlePokerMove(PokerInfo clientPokerInfo){
