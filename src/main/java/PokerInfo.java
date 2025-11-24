@@ -13,6 +13,7 @@ class PokerInfo implements Serializable {
     private int totalWinnings;
     private int gameOver;
     private String gameState;
+    private Deck deck;
 
     private String message; // say if player won or lost and how much
 
@@ -32,11 +33,20 @@ class PokerInfo implements Serializable {
 
     public ArrayList<Cards> getPlayerHand() { return playerCards; }
     public void setPlayerHand(ArrayList<Cards> playerHand) {
+        this.playerCards.clear();
         this.playerCards = playerHand;
+    }
+
+    public void addCardsToPlayer(Cards cards){
+        playerCards.add(cards);
+    }
+    public void addCardsToDealer(Cards cards){
+        dealerCards.add(cards);
     }
 
     public ArrayList<Cards> getDealerHand() { return dealerCards; }
     public void setDealerHand(ArrayList<Cards> dealerHand) {
+        this.dealerCards.clear();
         this.dealerCards = dealerHand;
     }
 
@@ -62,6 +72,18 @@ class PokerInfo implements Serializable {
     }
     public void clearDealerCards() {
         dealerCards.clear();
+    }
+
+    public void getNewDeck(){
+        deck = new Deck();
+    }
+
+    public Deck getDeck(){
+        return deck;
+    }
+
+    public ArrayList<Cards> getHand(){
+        return deck.add3CardsFromDeck();
     }
 
     public String getMessage() { return message; }

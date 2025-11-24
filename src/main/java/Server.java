@@ -117,8 +117,9 @@ public class Server{
                         PokerInfo data = (PokerInfo) in.readObject();
                         PokerInfo dataToSend = new PokerInfo();
                         if(data.getGameState().equals("draw")){
-                            dataToSend.setPlayerHand(data.getPlayerHand());
-                            dataToSend.setDealerHand(data.getDealerHand());
+                            dataToSend.setPlayerHand(data.getHand());
+                            dataToSend.setDealerHand(data.getHand());
+                            dataToSend.getNewDeck();
                             dataToSend.setGameState("drawFromserver");
                         }
                         else if(data.getGameState().equals("play")){//TODO
