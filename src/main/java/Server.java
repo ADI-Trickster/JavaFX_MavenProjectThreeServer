@@ -65,19 +65,18 @@ public class Server{
                 try {
                     t.out.writeObject(message);
                 }
-                catch(Exception e) {}
+                catch(Exception e) {
+                }
             }
         }
 
-        public void updateClients(PokerInfo pokerInfo) {
-//            for(int i = 0; i < clients.size(); i++) {
-//                ClientThread t = clients.get(i);
-//                try {
-//                    t.out.writeObject(pokerInfo);
-//                }
-//                catch(Exception e) {
-//                }
-//            }
+        public void updateClients(PokerInfo pokerInfo){
+            try {
+                out.writeObject(pokerInfo);
+            }
+            catch(Exception e){
+                callback.accept("Server socket did not launch");
+            }
         }
 
         public void run(){
@@ -94,9 +93,14 @@ public class Server{
 
             while(true) {
                 try {
-                    String data = in.readObject().toString();
-                    callback.accept("client: " + count + " sent: " + data);
-                    updateClients("client #"+count+" said: "+data);
+                    Object data = in.readObject();
+//                    callback.accept("client: " + count + " sent: " + data);
+//                    updateClients("client #"+count+" said: "+data);
+                    if(data instanceof PokerInfo){
+                        PokerInfo clientPokerInfo = (PokerInfo) data;
+
+                        handlePokerMove(clientPokerInfo);
+                    }
                 }
                 catch(Exception e) {
                     callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
@@ -107,6 +111,10 @@ public class Server{
                 }
             }
         }//end of run
+
+        public void handlePokerMove(PokerInfo clientPokerInfo){
+
+        }
 
         public void dealCards(){
             //new game setup
@@ -138,7 +146,7 @@ public class Server{
             //if we want to add the deal quailfy check
 
             //update client balance
-                //give them their winnings
+            //give them their winnings
             //set new bet to zero
             //set messageToSend
             //send to client
