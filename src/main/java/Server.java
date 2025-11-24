@@ -119,16 +119,17 @@ public class Server{
                         if(data.getGameState().equals("draw")){
                             dataToSend.setPlayerHand(data.getPlayerHand());
                             dataToSend.setDealerHand(data.getDealerHand());
-//                            dataToSend.
+                            dataToSend.setGameState("drawFromserver");
                         }
                         else if(data.getGameState().equals("play")){//TODO
                             dataToSend.setPlayerHand(data.getPlayerHand());
                             dataToSend.setDealerHand(data.getDealerHand());
+                            dataToSend.setGameState("playFromserver");
                         }else if(data.getMessage().equals("fold")){
                             //TODO
                         }else{
-//                            updateClients(data.getMessage());
                         }
+                            updateClients(dataToSend);
                     }
                     catch(Exception e) {
                         callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
