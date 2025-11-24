@@ -9,6 +9,10 @@ public class ThreeCardLogic {
     public static final int aPair = 2;
     public static final int nothingHand = 1;
 
+    public ThreeCardLogic() {
+
+    }
+
     public static int evalHand(ArrayList<Cards> hand){
         if(hand.size()<3){
             return nothingHand;
@@ -32,7 +36,7 @@ public class ThreeCardLogic {
         return nothingHand;
     }
 
-    public static int evalPPWinnings(ArrayList<Cards> hand, int bet){
+    public int evalPPWinnings(ArrayList<Cards> hand, int bet){
         int rankOfHand = evalHand(hand);
 
         if(rankOfHand == StraightFlush){

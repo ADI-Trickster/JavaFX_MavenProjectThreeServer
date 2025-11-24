@@ -63,6 +63,7 @@ public class Server{
         private Consumer<Serializable> callback;
         Deck clientDeck;
         PokerInfo pokerInfo;
+        ThreeCardLogic logic;
 
         ClientThread(Socket s, int count , Consumer<Serializable> callback){
             this.connection = s;
@@ -70,6 +71,7 @@ public class Server{
             this.callback = callback;
             clientDeck = new Deck();
             pokerInfo = new PokerInfo();
+            logic = new ThreeCardLogic();
         }
 
         public void updateClients(String message) {
@@ -125,10 +127,13 @@ public class Server{
                         else if(data.getGameState().equals("play")){//TODO
                             dataToSend.setPlayerHand(data.getPlayerHand());
                             dataToSend.setDealerHand(data.getDealerHand());
+                            int bet = data.getAnteBet();
+                            int winnings = logic.evalPPWinnings(dataToSend.getPlayerHand(),bet);
+                            dataToSend.addToTotalWinnings(winnings);
+
                             dataToSend.setGameState("playFromserver");
                         }else if(data.getMessage().equals("fold")){
                             //TODO
-                        }else{
                         }
                             updateClients(dataToSend);
                     }
