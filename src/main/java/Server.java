@@ -50,6 +50,7 @@ public class Server{
 
         for(ClientThread c : clients){
             c.stopClient();
+//            c.super().exit;
         }
         clients.clear();
         callback.accept("Server stopped");
