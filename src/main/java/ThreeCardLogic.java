@@ -131,4 +131,10 @@ public class ThreeCardLogic {
         boolean firstAndLast = (hand.get(0).getValue() == hand.get(2).getValue());
         return firstTwo || secondTwo || firstAndLast;
     }
+
+    public static boolean dealerQualifies(ArrayList<Cards> dealerHand) {
+        dealerHand.sort((a, b) -> b.getValue() - a.getValue());
+        int highestCardValue = dealerHand.get(0).getValue();
+        return highestCardValue >= 12;
+    }
 }
