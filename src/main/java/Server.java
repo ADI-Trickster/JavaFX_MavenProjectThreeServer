@@ -110,31 +110,49 @@ public class Server{
                 in = new ObjectInputStream(connection.getInputStream());
                 out = new ObjectOutputStream(connection.getOutputStream());
                 connection.setTcpNoDelay(true);
+
+                callback.accept("Client # " + count);
+
+                while(true){
+                    try{
+
+
+
+
+
+
+                    }
+                    catch(Exception e){
+                        callback.accept("Server socket did not launch");
+                    }
+                }
+
+
             }
             catch(Exception e) {
                 System.out.println("Streams not open");
             }
 
-            updateClients("new client on server: client #"+count);
-
-            while(true) {
-                try {
-                    Object data = in.readObject();
-                    if(data instanceof PokerInfo){
-                        PokerInfo clientPokerInfo = (PokerInfo) data;
-
-                        handlePokerMove(clientPokerInfo);
-                        updateClients(clientPokerInfo);
-                    }
-                }
-                catch(Exception e) {
-                    callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
-                    updateClients("Client #"+count+" has left the server!");
-                    clients.remove(this);
-//                    count--;
-                    break;
-                }
-            }
+//            updateClients("new client on server: client #"+count);
+//
+//            while(true) {
+//                try {
+//                    Object data = in.readObject();
+//                    if(data instanceof PokerInfo){
+//                        PokerInfo clientPokerInfo = (PokerInfo) data;
+//
+//                        handlePokerMove(clientPokerInfo);
+//                        updateClients(clientPokerInfo);
+//                    }
+//                }
+//                catch(Exception e) {
+//                    callback.accept("OOOOPPs...Something wrong with the socket from client: " + count + "....closing down!");
+//                    updateClients("Client #"+count+" has left the server!");
+//                    clients.remove(this);
+////                    count--;
+//                    break;
+//                }
+//            }
         }//end of run
 
         public void handlePokerMove(PokerInfo clientPokerInfo){
