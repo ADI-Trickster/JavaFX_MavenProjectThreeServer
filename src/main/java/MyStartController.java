@@ -66,7 +66,7 @@ public class MyStartController implements Initializable{
                 controller.ServerListView.getItems().add(data.toString());
 //                textF2.getText();
             });
-        }, port
+        }, port , IP
         );
         controller.serverConnection = serverConnection;
         controller.ServerListView.getItems().add("Starting server on port " + port + "...");
@@ -76,9 +76,16 @@ public class MyStartController implements Initializable{
     }
 
     public void StopServerMethod(ActionEvent event) throws IOException{
-//        serverConnection.close();
+        try{
+            serverConnection.stopServer();
+            System.out.println("Server stopped");
+        }
+        catch (Exception e){
+            System.out.println("Server stop failed");
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/startServer.fxml"));
         Parent root = loader.load();
+//        MyStartController controller = loader.getController();
         borderPane.getScene().setRoot(root);
     }
 

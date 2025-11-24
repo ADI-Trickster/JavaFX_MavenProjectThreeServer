@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -12,10 +13,13 @@ public class Server{
     TheServer server;
     private Consumer<Serializable> callback;
     int port;
+    String IP;
+    boolean serverRunning = true;
 
-    Server(Consumer<Serializable> call, int portNum){
+    Server(Consumer<Serializable> call, int portNum, String IPstr){
         callback = call;
         port = portNum;
+        this.IP = IPstr;
         server = new TheServer();
         server.start();
     }
@@ -24,15 +28,14 @@ public class Server{
         public void run() {
             try(ServerSocket mysocket = new ServerSocket(port);){
                 System.out.println("Server is waiting for a client!");
-                System.out.println("portNum: "+port);
+                System.out.println("portNum: "+ port);
 
-                while(true) {
+                while(serverRunning) {
                     ClientThread c = new ClientThread(mysocket.accept(), count, callback);
                     callback.accept("client has connected to server: " + "client #" + count);
                     System.out.println("client has connected to server: " + "client #" + count);
                     clients.add(c);
                     c.start();
-
                     count++;
                 }
             }//end of try
@@ -40,6 +43,16 @@ public class Server{
                 callback.accept("Server socket did not launch");
             }
         }//end of while
+    }
+
+    public void stopServer() throws IOException{
+        serverRunning = false;
+
+        for(ClientThread c : clients){
+            c.stopClient();
+        }
+        clients.clear();
+        callback.accept("Server stopped");
     }
 
     class ClientThread extends Thread{
@@ -79,6 +92,19 @@ public class Server{
             }
         }
 
+        void stopClient() throws IOException {
+            try{
+//                for(ClientThread c : clients){
+                    in.close();
+                    out.close();
+                    connection.close();
+//                }
+            }
+            catch(Exception e){
+                callback.accept("Did not close connection");
+            }
+        }
+
         public void run(){
             try {
                 in = new ObjectInputStream(connection.getInputStream());
@@ -94,8 +120,6 @@ public class Server{
             while(true) {
                 try {
                     Object data = in.readObject();
-//                    callback.accept("client: " + count + " sent: " + data);
-//                    updateClients("client #"+count+" said: "+data);
                     if(data instanceof PokerInfo){
                         PokerInfo clientPokerInfo = (PokerInfo) data;
 
