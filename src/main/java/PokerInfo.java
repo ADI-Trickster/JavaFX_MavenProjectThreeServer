@@ -33,7 +33,7 @@ class PokerInfo implements Serializable {
 
     public ArrayList<Cards> getPlayerHand() { return playerCards; }
     public void setPlayerHand(ArrayList<Cards> playerHand) {
-        this.playerCards.clear();
+        clearPlayerCards();
         this.playerCards = playerHand;
     }
 
@@ -46,7 +46,7 @@ class PokerInfo implements Serializable {
 
     public ArrayList<Cards> getDealerHand() { return dealerCards; }
     public void setDealerHand(ArrayList<Cards> dealerHand) {
-        this.dealerCards.clear();
+        clearDealerCards();
         this.dealerCards = dealerHand;
     }
 
