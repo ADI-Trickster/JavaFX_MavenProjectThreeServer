@@ -1,3 +1,4 @@
+import javax.swing.text.html.ListView;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -125,13 +126,14 @@ public class Server{
                             dataToSend.getNewDeck();
                             dataToSend.setGameState("drawFromserver");
                         }
-                        else if(data.getGameState().equals("play")){//TODO
+                        else if(data.getGameState().equals("play")){
                             dataToSend.setPlayerHand(data.getPlayerHand());
                             dataToSend.setDealerHand(data.getDealerHand());
                             int bet = data.getAnteBet();
-                            int winnings = logic.evalPPWinnings(dataToSend.getPlayerHand(),bet);
+                            int winnings = logic.evalPPWinnings(dataToSend.getPlayerHand(), bet);
+                            int winner = logic.compareHands(dataToSend.getDealerHand(),dataToSend.getPlayerHand());
+                            dataToSend.setWinnerOfGame(winner);
                             dataToSend.addToTotalWinnings(winnings);
-
                             dataToSend.setGameState("playFromserver");
                         }else if(data.getMessage().equals("fold")){
                             //TODO
